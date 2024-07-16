@@ -1,25 +1,64 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Blocks;
+using HeroSpace;
+using Storage.Items;
 using UnityEngine;
 
 namespace InventorySystem {
     public class InventoryPickUpGreenFabric : InventoryPickUp {
-        protected override void ProcessPickUp(Collider other){
-            if (other.TryGetComponent(out Player player))
-                if (player.TryGetComponent(out InventoryHold inventoryHold)){
-                    var redBlockItems = inventoryHold.inventory.items
+        private InventoryHold _inventoryHold;
+
+        private void Awake() {
+            _inventoryHold = GetComponent<InventoryHold>();
+
+        }
+
+        protected override void ProcessPickUp(Collider other) {
+            if (other.TryGetComponent(out HeroSpace.HeroTrigger player))
+                if (player.TryGetComponent(out InventoryHold inventoryHero)) {
+                    List<Item> redBlockItems = inventoryHero.inventory.items
                         .Where(item => item.GetComponent<RedBlock>() != null)
                         .ToList();
-                    var blueBlockItems = inventoryHold.inventory.items
+                    List<Item> blueBlockItems = inventoryHero.inventory.items
                         .Where(item => item.GetComponent<BlueBlock>() != null)
                         .ToList();
-                    blueBlockPickUpFromPlayer.AddRange(blueBlockItems);
-                    blueBlockItems.ForEach(item => inventoryHold.inventory.items.Remove(item));
-                    redBlockPickUpFromPlayer.AddRange(redBlockItems);
-                    redBlockItems.ForEach(item => inventoryHold.inventory.items.Remove(item));
-                    DestoyGameObject(redBlockItems);
-                    DestoyGameObject(blueBlockItems);
+                    
+                    _inventoryHold.blueBlockPickUpFromPlayer.AddRange(blueBlockItems);
+                    _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
+                    
+                    
+                    redBlockItems.ForEach(itemToRemove =>
+                    {
+                        inventoryHero.inventory.items.Remove(itemToRemove);
+                        Destroy(itemToRemove.gameObject);
+                    });
+                    blueBlockItems.ForEach(itemToRemove =>
+                    {
+                        inventoryHero.inventory.items.Remove(itemToRemove);
+                        Destroy(itemToRemove.gameObject);
+                    });
                 }
         }
+
+        // protected override void ProcessPickUp(Collider other) {
+        //     if (other.TryGetComponent(out HeroTrigger player))
+        //         if (player.TryGetComponent(out InventoryHold inventoryHero)) {
+        //             List<Item> redBlockItems = inventoryHero.inventory.items
+        //                 .Where(item => item.GetComponent<RedBlock>() != null)
+        //                 .ToList();
+        //            
+        //             _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
+        //           
+        //           
+        //             foreach (Item itemToRemove in redBlockItems) {
+        //                 inventoryHero.inventory.items.Remove(itemToRemove);
+        //                 Destroy(itemToRemove.gameObject);
+        //                 
+        //             }
+        //             
+        //         }
+        // }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace InventorySystem {
     public abstract class InventoryPickUp : MonoBehaviour {
-        public List<Item> redBlockPickUpFromPlayer;
-        public List<Item> blueBlockPickUpFromPlayer;
-        public List<Item> greenBlockPickUpFromPlayer;
+        // public List<Item> redBlockPickUpFromPlayer;
+        // public List<Item> blueBlockPickUpFromPlayer;
+        // public List<Item> greenBlockPickUpFromPlayer;
 
         private void OnTriggerEnter(Collider other){
             ProcessPickUp(other);
@@ -14,8 +14,6 @@ namespace InventorySystem {
 
         protected abstract void ProcessPickUp(Collider other);
 
-        protected void DestoyGameObject(List<Item> blockList){
-            foreach (var item in blockList) Destroy(item.gameObject);
-        }
+        
     }
 }

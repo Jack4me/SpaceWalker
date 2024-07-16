@@ -3,13 +3,14 @@ using Storage.Items;
 
 namespace InventorySystem {
     public class Inventory {
+        public int Capacity{ get; }
+
+        public List<Item> items{ get; }
+
         public Inventory(int capacity){
             Capacity = capacity;
             items = new List<Item>();
         }
-
-        public int Capacity{ get; }
-        public List<Item> items{ get; }
 
         public bool AddItem(Item item){
             if (items.Count < Capacity){

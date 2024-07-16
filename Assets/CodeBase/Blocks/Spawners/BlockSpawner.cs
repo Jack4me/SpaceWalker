@@ -7,8 +7,8 @@ namespace Blocks.Spawners {
         [SerializeField] protected ItemFactory _itemFactory;
         [SerializeField] protected Blocktype _blocktype;
         [SerializeField] protected float spawnBlockTime = 10f;
+        [SerializeField] protected GameObject spawnPoint;
 
-        public abstract void Update();
 
         public abstract void Spawner();
     }

@@ -8,9 +8,9 @@ namespace Storage.Items.Factory {
         [SerializeField] private List<BlockHolder> _blockHolders;
 
         public Item CreateItemBlock(Blocktype blockType){
-            var blockHolders = _blockHolders.Where(holder => holder.Blocktype == blockType);
-            var gameObjects = blockHolders.Select(holder => holder.Block);
-            var block = gameObjects.First();
+            IEnumerable<BlockHolder> blockHolders = _blockHolders.Where(holder => holder.Blocktype == blockType);
+            IEnumerable<GameObject> gameObjects = blockHolders.Select(holder => holder.Block);
+            GameObject block = gameObjects.First();
             return Instantiate(block).GetComponent<Item>();
         }
     }

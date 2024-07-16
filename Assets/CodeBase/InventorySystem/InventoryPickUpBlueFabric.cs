@@ -1,24 +1,38 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Blocks;
+using Blocks.Spawners;
+using HeroSpace;
+using Storage.Items;
 using UnityEngine;
 
 namespace InventorySystem {
     public class InventoryPickUpBlueFabric : InventoryPickUp {
-        protected override void ProcessPickUp(Collider other){
-            // Проверяем, есть ли компонент Player у объекта, с которым взаимодействуем
-            if (other.TryGetComponent(out Player player))
-                // Если есть Player, проверяем наличие компонента InventoryHold у него
-                if (player.TryGetComponent(out InventoryHold inventoryHold)){
-                    // Создаем список для хранения предметов с компонентом RedBlock
-                    var redBlockItems = inventoryHold.inventory.items
+        public List<Item> item = new List<Item>();
+        private BlockSpawnerBlue blockSpawnerBlue;
+        private InventoryHold _inventoryHold;
+
+        private void Awake() {
+            blockSpawnerBlue = GetComponent<BlockSpawnerBlue>();
+            _inventoryHold = GetComponent<InventoryHold>();
+        }
+
+        protected override void ProcessPickUp(Collider other) {
+            if (other.TryGetComponent(out HeroPickUp player))
+                if (player.TryGetComponent(out InventoryHold inventoryHero)) {
+                    List<Item> redBlockItems = inventoryHero.inventory.items
                         .Where(item => item.GetComponent<RedBlock>() != null)
                         .ToList();
                     // Фильтрация по наличию RedBlock
                     // Добавляем все найденные предметы с RedBlock в список redBlockPickUpFromPlayer
-                    redBlockPickUpFromPlayer.AddRange(redBlockItems);
-                    // Удаляем найденные предметы с RedBlock из инвентаря 
-                    redBlockItems.ForEach(item => inventoryHold.inventory.items.Remove(item));
-                    DestoyGameObject(redBlockItems);
+
+                    _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
+                    foreach (Item itemToRemove in redBlockItems) {
+                        inventoryHero.inventory.items.Remove(itemToRemove);
+                        Destroy(itemToRemove.gameObject);
+                    }
+                    blockSpawnerBlue.StartSpawning();
                 }
         }
     }

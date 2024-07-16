@@ -10,6 +10,6 @@ namespace Storage {
     public abstract class StorageBase : MonoBehaviour {
         //   [SerializeField] protected Blocktype _blocktype;
 
-        protected abstract void ProcessPickUp(Collider other);
+        // protected abstract void ProcessPickUp(Collider other);
     }
 }
