@@ -531,7 +531,6 @@ GameObject:
   - component: {fileID: 684511169}
   - component: {fileID: 684511168}
   - component: {fileID: 684511175}
-  - component: {fileID: 684511172}
   - component: {fileID: 684511173}
   - component: {fileID: 684511174}
   - component: {fileID: 684511176}
@@ -631,18 +630,6 @@ Transform:
   - {fileID: 143245457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &684511172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684511166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7f55dd7b553614daa13602d4424a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &684511173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,6 +810,7 @@ GameObject:
   - component: {fileID: 805340800}
   - component: {fileID: 805340799}
   - component: {fileID: 805340802}
+  - component: {fileID: 805340803}
   m_Layer: 0
   m_Name: Fabric 1
   m_TagString: Untagged
@@ -995,8 +983,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemFactory: {fileID: 2092700380}
   _blocktype: 0
-  spawnBlockTime: 1
+  spawnBlockTime: 0.5
   spawnPoint: {fileID: 46152501}
+--- !u!114 &805340803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805340790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1a37e66249bc74fadbdbcf3efa169b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: []
 --- !u!1 &899285060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,11 +1494,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockHolders:
-  - Block: {fileID: 4028077196978425004, guid: b5d178bdc7a07a140b0f7e93ac9917c5, type: 3}
+  - Block: {fileID: 4028077196978425004, guid: 95b216e92ba2a2844b24b72bac2bad19, type: 3}
     Blocktype: 0
-  - Block: {fileID: 4028077196978425004, guid: 1cf525f980c7e37489998e1d83c4d260, type: 3}
+  - Block: {fileID: 4028077196978425004, guid: 8e4134fc88d3cad428fc0daab654d0e4, type: 3}
     Blocktype: 1
-  - Block: {fileID: 4028077196978425004, guid: 370963938df767242af39087a14c1d9b, type: 3}
+  - Block: {fileID: 4028077196978425004, guid: 17bf4ad41ed57504d80dbef474132bd2, type: 3}
     Blocktype: 2
 --- !u!4 &2092700381
 Transform:

@@ -8,7 +8,7 @@ namespace InventorySystem {
         // public List<Item> blueBlockPickUpFromPlayer;
         // public List<Item> greenBlockPickUpFromPlayer;
 
-        private void OnTriggerEnter(Collider other){
+        private void OnTriggerStay(Collider other){
             ProcessPickUp(other);
         }
 

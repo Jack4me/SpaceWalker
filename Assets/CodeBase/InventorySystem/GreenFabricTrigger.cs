@@ -7,7 +7,7 @@ using Storage.Items;
 using UnityEngine;
 
 namespace InventorySystem {
-    public class InventoryPickUpGreenFabric : InventoryPickUp {
+    public class GreenFabricTrigger : InventoryPickUp {
         private InventoryHold _inventoryHold;
 
         private void Awake() {
