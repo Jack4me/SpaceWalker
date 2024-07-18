@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Storage.Items;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace InventorySystem {
     public class Inventory {
@@ -15,6 +16,7 @@ namespace InventorySystem {
         public bool AddItem(Item item){
             if (items.Count < Capacity){
                 items.Add(item);
+                
                 return true;
             }
             return false;
