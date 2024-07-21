@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/CodeBase/InventorySystem/RedFabricTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CodeBase/InventorySystem/Sorting/PositionBlockUptade.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -68,6 +69,9 @@
       <workItem from="1721120002319" duration="4242000" />
       <workItem from="1721204887583" duration="8235000" />
       <workItem from="1721295117483" duration="8897000" />
+      <workItem from="1721377600392" duration="3503000" />
+      <workItem from="1721461309085" duration="7491000" />
+      <workItem from="1721548320648" duration="7431000" />
     </task>
     <servers />
   </component>

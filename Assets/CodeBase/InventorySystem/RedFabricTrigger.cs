@@ -21,6 +21,11 @@ namespace InventorySystem {
             if (other.TryGetComponent(out HeroPickUp player)) {
                 Collider currentCollider = GetComponent<Collider>();
                 if (currentCollider != null) {
+                    if (player.holdPlayer.inventory.items.Count >= 10) {
+                        return;
+                    }
+
+                    item = _inventoryHold.inventory.items;
                     player.PickBlocks(currentCollider);
                 }
             }

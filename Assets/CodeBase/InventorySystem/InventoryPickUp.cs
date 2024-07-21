@@ -6,7 +6,7 @@ namespace InventorySystem {
     public abstract class InventoryPickUp : MonoBehaviour {
       
 
-        private void OnTriggerStay(Collider other){
+        private void OnTriggerEnter(Collider other){
             ProcessPickUp(other);
         }
 

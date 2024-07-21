@@ -6,6 +6,13 @@ namespace Blocks {
     public static class BlockSortPositions {
         public const float DefaultBlockHeight = 1.0f;
 
+
+        public static void SortPlayerBLocks(List<Item> itemsPlayerList) {
+            
+        }
+        
+        
+        
         public static void PositionBlocks(GameObject item, Transform spawnPoint, float blockHeight = DefaultBlockHeight) {
             Vector3 newPosition = GetNewBlockPosition(spawnPoint, blockHeight);
             item.transform.position = newPosition;
@@ -20,10 +27,6 @@ namespace Blocks {
                 Transform lastBlock = GetLastActiveBlock(spawnPoint);
                 return lastBlock != null ? lastBlock.position + Vector3.up * blockHeight : spawnPoint.position;
             }
-        }
-
-        private static void ChangeParentObject(GameObject item, Transform spawnPoint) {
-            item.transform.SetParent(spawnPoint);
         }
 
         public static void RepositionExistingBlocks(Transform spawnPoint, float blockHeight = DefaultBlockHeight) {
@@ -47,6 +50,10 @@ namespace Blocks {
                 }
             }
             return null;
+        }
+
+        private static void ChangeParentObject(GameObject item, Transform spawnPoint) {
+            item.transform.SetParent(spawnPoint);
         }
     }
 }
