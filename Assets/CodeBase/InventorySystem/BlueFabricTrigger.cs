@@ -19,10 +19,16 @@ namespace InventorySystem {
             _inventoryHold = GetComponent<InventoryHold>();
         }
 
-        protected override void ProcessPickUp(Collider other) {
+        protected override void ProcessGiveBlock(Collider other) {
             if (other.TryGetComponent(out HeroPickUp player)) {
                 GetBlocks(player);
                 PickupBlocks(player);
+            }
+        }
+
+        protected override void StopProcessGiveBlock(Collider other) {
+            if (other.TryGetComponent(out HeroPickUp player)) {
+                player.canTake = false;
             }
         }
 

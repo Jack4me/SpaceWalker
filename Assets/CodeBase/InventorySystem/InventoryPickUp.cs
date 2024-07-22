@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Storage.Items;
 using UnityEngine;
@@ -7,10 +8,17 @@ namespace InventorySystem {
       
 
         private void OnTriggerEnter(Collider other){
-            ProcessPickUp(other);
+            ProcessGiveBlock(other);
         }
 
-        protected abstract void ProcessPickUp(Collider other);
+        private void OnTriggerExit(Collider other) {
+            StopProcessGiveBlock(other);
+        }
+
+       
+
+        protected abstract void ProcessGiveBlock(Collider other);
+        protected abstract void StopProcessGiveBlock(Collider other);
 
         
     }

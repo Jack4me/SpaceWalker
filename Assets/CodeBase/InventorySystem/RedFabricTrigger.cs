@@ -17,7 +17,12 @@ namespace InventorySystem {
             _inventoryHold = GetComponent<InventoryHold>();
         }
 
-        protected override void ProcessPickUp(Collider other) {
+        protected override void StopProcessGiveBlock(Collider other) {
+            if (other.TryGetComponent(out HeroPickUp player)) {
+                player.canTake = false;
+            }
+        }
+        protected override void ProcessGiveBlock(Collider other) {
             if (other.TryGetComponent(out HeroPickUp player)) {
                 Collider currentCollider = GetComponent<Collider>();
                 if (currentCollider != null) {

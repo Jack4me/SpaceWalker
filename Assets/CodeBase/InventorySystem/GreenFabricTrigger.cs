@@ -15,7 +15,7 @@ namespace InventorySystem {
 
         }
 
-        protected override void ProcessPickUp(Collider other) {
+        protected override void ProcessGiveBlock(Collider other) {
             if (other.TryGetComponent(out HeroSpace.HeroTrigger player))
                 if (player.TryGetComponent(out InventoryHold inventoryHero)) {
                     List<Item> redBlockItems = inventoryHero.inventory.items
@@ -40,6 +40,12 @@ namespace InventorySystem {
                         Destroy(itemToRemove.gameObject);
                     });
                 }
+        }
+
+        protected override void StopProcessGiveBlock(Collider other) {
+            if (other.TryGetComponent(out HeroPickUp player)) {
+                player.canTake = false;
+            }
         }
 
         // protected override void ProcessPickUp(Collider other) {

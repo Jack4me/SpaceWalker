@@ -17,7 +17,7 @@ namespace Blocks {
             Vector3 newPosition = GetNewBlockPosition(spawnPoint, blockHeight);
             item.transform.position = newPosition;
             ChangeParentObject(item, spawnPoint);
-            RepositionExistingBlocks(spawnPoint);
+            AlignBlocks(spawnPoint);
         }
 
         private static Vector3 GetNewBlockPosition(Transform spawnPoint, float blockHeight) {
@@ -29,7 +29,7 @@ namespace Blocks {
             }
         }
 
-        public static void RepositionExistingBlocks(Transform spawnPoint, float blockHeight = DefaultBlockHeight) {
+        public static void AlignBlocks(Transform spawnPoint, float blockHeight = DefaultBlockHeight) {
             List<Transform> existingBlocks = new List<Transform>();
 
             foreach (Transform child in spawnPoint) {
