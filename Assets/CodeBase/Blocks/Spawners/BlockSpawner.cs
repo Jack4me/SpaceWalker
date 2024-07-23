@@ -10,6 +10,6 @@ namespace Blocks.Spawners {
         [SerializeField] protected GameObject spawnPoint;
 
 
-        public abstract void Spawner();
+        public abstract void StartSpawning();
     }
 }

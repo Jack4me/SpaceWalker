@@ -14,7 +14,7 @@ namespace InventorySystem {
         private HeroTrigger _hero;
         private Vector3 nextItemPosition;
         public Inventory inventory { get; private set; }
-        public List<Item> redBlockPickUpFromPlayer;
+        public List<Item> redBlockHolder;
         public List<Item> blueBlockPickUpFromPlayer;
         public List<Item> greenBlockPickUpFromPlayer;
         private void Awake() {

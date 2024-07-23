@@ -73,12 +73,14 @@ namespace InventorySystem {
             }
         }
 
-        protected override void ProcessGiveBlock(Collider other) {
+        protected override void ProcessSwapBlock(Collider other) {
             if (other.TryGetComponent(out HeroPickUp player)) {
-                _inventoryHold.redBlockPickUpFromPlayer = SelectedRedBlocks(player);
+                       SelectedRedBlocks(player);
                 Collider currentFabricCollider = GetComponent<Collider>();
                 PlayerPickBlocks(currentFabricCollider, player);
+                
             }
+            blockSpawnerBlue.StartSpawning();
         }
 
         public List<Item> SelectedRedBlocks(HeroPickUp player) {
@@ -86,6 +88,11 @@ namespace InventorySystem {
                 List<Item> redBlockItems = new List<Item>(inventoryHero.inventory.items)
                     .Where(item => item.GetComponent<RedBlock>() != null)
                     .ToList();
+                foreach (var item in redBlockItems) {
+                    _inventoryHold.redBlockHolder.Add(item);
+                    inventoryHero.inventory.items.Remove(item);
+                                
+                }
                 return redBlockItems;
             }
 

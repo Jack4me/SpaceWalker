@@ -22,7 +22,7 @@ namespace InventorySystem {
                 player.canTake = false;
             }
         }
-        protected override void ProcessGiveBlock(Collider other) {
+        protected override void ProcessSwapBlock(Collider other) {
             if (other.TryGetComponent(out HeroPickUp player)) {
                 Collider currentCollider = GetComponent<Collider>();
                 if (currentCollider != null) {

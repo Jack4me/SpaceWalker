@@ -14,7 +14,7 @@ namespace Blocks.Spawners {
         private void Awake() {
             //если делаю в awake, то вылетает нулл
             inventory = GetComponent<InventoryHold>().inventory;
-            redBlockPickUpFromPlayer = GetComponent<InventoryHold>().redBlockPickUpFromPlayer;
+            redBlockPickUpFromPlayer = GetComponent<InventoryHold>().redBlockHolder;
             blueBlockPickUpFromPlayer = GetComponent<InventoryHold>().blueBlockPickUpFromPlayer;
         }
 
@@ -27,10 +27,10 @@ namespace Blocks.Spawners {
         private IEnumerator SpawnerCoroutine() {
 
             yield return new WaitForSeconds(1f);
-            Spawner();
+            StartSpawning();
         }
 
-        public override void Spawner() {
+        public override void StartSpawning() {
             if (redBlockPickUpFromPlayer.Count > 0 &&  blueBlockPickUpFromPlayer.Count > 0) {
                
                 

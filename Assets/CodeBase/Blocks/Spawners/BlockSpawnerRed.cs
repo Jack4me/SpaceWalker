@@ -36,7 +36,7 @@ namespace Blocks.Spawners {
             isSpawning = false; 
         }
 
-        public override void Spawner() {
+        public override void StartSpawning() {
            
         }
     }

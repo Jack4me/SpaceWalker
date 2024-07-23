@@ -15,7 +15,7 @@ namespace InventorySystem {
 
         }
 
-        protected override void ProcessGiveBlock(Collider other) {
+        protected override void ProcessSwapBlock(Collider other) {
             if (other.TryGetComponent(out HeroSpace.HeroTrigger player))
                 if (player.TryGetComponent(out InventoryHold inventoryHero)) {
                     List<Item> redBlockItems = inventoryHero.inventory.items
@@ -26,7 +26,7 @@ namespace InventorySystem {
                         .ToList();
                     
                     _inventoryHold.blueBlockPickUpFromPlayer.AddRange(blueBlockItems);
-                    _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
+                    _inventoryHold.redBlockHolder.AddRange(redBlockItems);
                     
                     
                     redBlockItems.ForEach(itemToRemove =>

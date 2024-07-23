@@ -8,7 +8,7 @@ namespace InventorySystem {
       
 
         private void OnTriggerEnter(Collider other){
-            ProcessGiveBlock(other);
+            ProcessSwapBlock(other);
         }
 
         private void OnTriggerExit(Collider other) {
@@ -17,7 +17,7 @@ namespace InventorySystem {
 
        
 
-        protected abstract void ProcessGiveBlock(Collider other);
+        protected abstract void ProcessSwapBlock(Collider other);
         protected abstract void StopProcessGiveBlock(Collider other);
 
         
