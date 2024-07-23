@@ -9,21 +9,62 @@ using UnityEngine;
 
 namespace InventorySystem {
     public class BlueFabricTrigger : InventoryPickUp {
+        //     public List<Item> item = new List<Item>();
+        //     private BlockSpawnerBlue blockSpawnerBlue;
+        //     private InventoryHold _inventoryHold;
+        //     
+        //
+        //     private void Awake() {
+        //         blockSpawnerBlue = GetComponent<BlockSpawnerBlue>();
+        //         _inventoryHold = GetComponent<InventoryHold>();
+        //     }
+        //
+        //     protected override void ProcessGiveBlock(Collider other) {
+        //         if (other.TryGetComponent(out HeroPickUp player)) {
+        //             GetBlocks(player);
+        //             PickupBlocks(player);
+        //         }
+        //     }
+        //
+        //     protected override void StopProcessGiveBlock(Collider other) {
+        //         if (other.TryGetComponent(out HeroPickUp player)) {
+        //             player.canTake = false;
+        //         }
+        //     }
+        //
+        //     private void PickupBlocks(HeroPickUp player) {
+        //         Collider currentCollider = GetComponent<Collider>();
+        //         if (currentCollider != null) {
+        //             player.PickBlocks(currentCollider);
+        //         }
+        //     }
+        //
+        //     private void GetBlocks(HeroPickUp player) {
+        //         if (player.TryGetComponent(out InventoryHold inventoryHero)) {
+        //             List<Item> redBlockItems = new List<Item>(inventoryHero.inventory.items) 
+        //                 .Where(item => item.GetComponent<RedBlock>() != null)
+        //                 .ToList();
+        //             // Фильтрация по наличию RedBlock
+        //             // Добавляем все найденные предметы с RedBlock в список redBlockPickUpFromPlayer
+        //
+        //             _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
+        //             foreach (Item itemToRemove in redBlockItems) {
+        //                 inventoryHero.inventory.items.Remove(itemToRemove);
+        //                 Destroy(itemToRemove.gameObject);
+        //             }
+        //
+        //             blockSpawnerBlue.StartSpawning();
+        //         }
+        //     }
+        // }
+
         public List<Item> item = new List<Item>();
         private BlockSpawnerBlue blockSpawnerBlue;
         private InventoryHold _inventoryHold;
-        
 
         private void Awake() {
             blockSpawnerBlue = GetComponent<BlockSpawnerBlue>();
             _inventoryHold = GetComponent<InventoryHold>();
-        }
-
-        protected override void ProcessGiveBlock(Collider other) {
-            if (other.TryGetComponent(out HeroPickUp player)) {
-                GetBlocks(player);
-                PickupBlocks(player);
-            }
         }
 
         protected override void StopProcessGiveBlock(Collider other) {
@@ -32,28 +73,33 @@ namespace InventorySystem {
             }
         }
 
-        private void PickupBlocks(HeroPickUp player) {
-            Collider currentCollider = GetComponent<Collider>();
-            if (currentCollider != null) {
-                player.PickBlocks(currentCollider);
+        protected override void ProcessGiveBlock(Collider other) {
+            if (other.TryGetComponent(out HeroPickUp player)) {
+                _inventoryHold.redBlockPickUpFromPlayer = SelectedRedBlocks(player);
+                Collider currentFabricCollider = GetComponent<Collider>();
+                PlayerPickBlocks(currentFabricCollider, player);
             }
         }
 
-        private void GetBlocks(HeroPickUp player) {
+        public List<Item> SelectedRedBlocks(HeroPickUp player) {
             if (player.TryGetComponent(out InventoryHold inventoryHero)) {
-                List<Item> redBlockItems = new List<Item>(inventoryHero.inventory.items) 
+                List<Item> redBlockItems = new List<Item>(inventoryHero.inventory.items)
                     .Where(item => item.GetComponent<RedBlock>() != null)
                     .ToList();
-                // Фильтрация по наличию RedBlock
-                // Добавляем все найденные предметы с RedBlock в список redBlockPickUpFromPlayer
+                return redBlockItems;
+            }
 
-                _inventoryHold.redBlockPickUpFromPlayer.AddRange(redBlockItems);
-                foreach (Item itemToRemove in redBlockItems) {
-                    inventoryHero.inventory.items.Remove(itemToRemove);
-                    Destroy(itemToRemove.gameObject);
+            return null;
+        }
+
+        private void PlayerPickBlocks(Collider currentFabricCollider, HeroPickUp player) {
+            if (currentFabricCollider != null) {
+                if (player.holdPlayer.inventory.items.Count > 10) {
+                    return;
                 }
 
-                blockSpawnerBlue.StartSpawning();
+                item = _inventoryHold.inventory.items;
+                player.PickBlocks(currentFabricCollider);
             }
         }
     }

@@ -7,51 +7,88 @@ using UnityEngine;
 
 namespace Blocks.Spawners {
     public class BlockSpawnerBlue : BlockSpawner {
-        [SerializeField] private InventoryPickUp _inventoryPickUp;
-        private Inventory inventory;
-        private float timer = 0;
-        private List<Item> redBlockPickUpFromPlayer;
-        private bool isSpawning
-            ;
+        //     [SerializeField] private InventoryPickUp _inventoryPickUp;
+        //     private Inventory inventory;
+        //     private float timer = 0;
+        //     private List<Item> redBlockPickUpFromPlayer;
+        //     private bool isSpawning
+        //         ;
+        //
+        //     private void Awake() {
+        //         //если делаю в awake, то вылетает нулл
+        //         inventory = GetComponent<InventoryHold>().inventory;
+        //          redBlockPickUpFromPlayer = GetComponent<InventoryHold>().redBlockPickUpFromPlayer;
+        //     }
+        //
+        //
+        //     public void StartSpawning() {
+        //         if (!isSpawning && redBlockPickUpFromPlayer.Count > 0) {
+        //             StartCoroutine(SpawnerCoroutine());
+        //         }
+        //     }
+        //     
+        //     
+        //
+        //     private IEnumerator SpawnerCoroutine() {
+        //       
+        //         isSpawning = true; // Устанавливаем флаг в true, чтобы предотвратить повторный запуск
+        //
+        //         while (redBlockPickUpFromPlayer.Count > 0) {
+        //             yield return new WaitForSeconds(0.5f); 
+        //             Spawner();
+        //         }
+        //
+        //         isSpawning = false; // Сбрасываем флаг после завершения спаунинга
+        //     }
+        //
+        //     public override void Spawner() {
+        //         if (redBlockPickUpFromPlayer.Count > 0) {
+        //            
+        //             
+        //                 Item itemBlock = _itemFactory.CreateItemBlock(_blocktype);
+        //                 inventory.AddItem(itemBlock); 
+        //                 BlockSortPositions.PositionBlocks(itemBlock.gameObject, spawnPoint.transform, 1.0f);
+        //                 int lastIndex = redBlockPickUpFromPlayer.Count - 1;
+        //                 redBlockPickUpFromPlayer.RemoveAt(lastIndex);
+        //         }
+        //
+        //     }
+        // }
+        protected Inventory inventory;
+        private float timer;
+        private bool isSpawning;
 
         private void Awake() {
-            //если делаю в awake, то вылетает нулл
             inventory = GetComponent<InventoryHold>().inventory;
-             redBlockPickUpFromPlayer = GetComponent<InventoryHold>().redBlockPickUpFromPlayer;
         }
 
-
-        public void StartSpawning() {
-            if (!isSpawning && redBlockPickUpFromPlayer.Count > 0) {
+        private void Update() {
+            if (!isSpawning && inventory.items.Count < inventory.Capacity) {
                 StartCoroutine(SpawnerCoroutine());
             }
         }
-        
-        
 
         private IEnumerator SpawnerCoroutine() {
-          
-            isSpawning = true; // Устанавливаем флаг в true, чтобы предотвратить повторный запуск
+            yield return new WaitForSeconds(0.01f);
+            isSpawning = true;
+            while (inventory.items.Count < inventory.Capacity) {
+                
+                    var itemBlock = _itemFactory.CreateItemBlock(_blocktype);
+                    inventory.AddItem(itemBlock);
+                    BlockSortPositions.PositionBlocks(itemBlock.gameObject, spawnPoint.transform, 1.0f);
+                    timer = 0;
 
-            while (redBlockPickUpFromPlayer.Count > 0) {
-                yield return new WaitForSeconds(0.5f); 
-                Spawner();
+                yield return null;
             }
 
-            isSpawning = false; // Сбрасываем флаг после завершения спаунинга
+            isSpawning = false;
+        }
+
+        public void TakeBLocksFromPlayer() {
+            
         }
 
         public override void Spawner() {
-            if (redBlockPickUpFromPlayer.Count > 0) {
-               
-                
-                    Item itemBlock = _itemFactory.CreateItemBlock(_blocktype);
-                    inventory.AddItem(itemBlock); 
-                    BlockSortPositions.PositionBlocks(itemBlock.gameObject, spawnPoint.transform, 1.0f);
-                    int lastIndex = redBlockPickUpFromPlayer.Count - 1;
-                    redBlockPickUpFromPlayer.RemoveAt(lastIndex);
-            }
-
         }
     }
 }

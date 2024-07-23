@@ -34,7 +34,7 @@ namespace HeroSpace {
         private IEnumerator AddBlocksWithDelay(InventoryHold inventoryHold) {
             List<Item> itemsToRemove = new List<Item>(inventoryHold.inventory.items);
             foreach (Item item in itemsToRemove) {
-                if (holdPlayer.inventory.items.Count <= 10) {
+                if (holdPlayer.inventory.items.Count < 10) {
                     if (holdPlayer.inventory.items.Contains(item)) {
                         yield break;
                     }
