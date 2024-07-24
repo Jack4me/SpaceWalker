@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CodeBase/InventorySystem/RedFabricTrigger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CodeBase/InventorySystem/Sorting/PositionBlockUptade.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -74,6 +75,7 @@
       <workItem from="1721548320648" duration="7431000" />
       <workItem from="1721639682598" duration="5293000" />
       <workItem from="1721724551458" duration="9622000" />
+      <workItem from="1721806778203" duration="6464000" />
     </task>
     <servers />
   </component>

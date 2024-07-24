@@ -15,8 +15,8 @@ namespace InventorySystem {
         private Vector3 nextItemPosition;
         public Inventory inventory { get; private set; }
         public List<Item> redBlockHolder;
-        public List<Item> blueBlockPickUpFromPlayer;
-        public List<Item> greenBlockPickUpFromPlayer;
+        public List<Item> blueBlockHolder;
+        public List<Item> greenBlockHolder;
         private void Awake() {
             inventory = new Inventory(10);
         }

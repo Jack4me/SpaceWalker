@@ -47,12 +47,11 @@ namespace HeroSpace {
                 _items = holdPlayer.inventory.items;
 
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
             }
 
             //inventoryHold.inventory.Clear();
             canTake = false;
-            Debug.Log("СПИСОК ОЧИСТИЛ");
             //   BlockSortPositions.RepositionExistingBlocks(spawnPoint.transform);
         }
     }

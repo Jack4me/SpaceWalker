@@ -56,39 +56,31 @@ namespace Blocks.Spawners {
         // }
         protected InventoryHold holder;
         private float timer;
-        private bool isSpawning;
+        private bool isSpawning =false;
 
         private void Awake() {
             holder = GetComponent<InventoryHold>();
         }
 
-        private void Update() {
-
+        public override void StartSpawning() {
+            if (!isSpawning && holder.redBlockHolder.Count <= 10) {
+                StartCoroutine(SpawnerCoroutine());
+            }
         }
 
-
         private IEnumerator SpawnerCoroutine() {
-            yield return new WaitForSeconds(0.01f);
             isSpawning = true;
-            while (holder.redBlockHolder.Count < holder.inventory.Capacity) {
-
+            while (holder.redBlockHolder.Count > 0) {
                 var itemBlock = _itemFactory.CreateItemBlock(_blocktype);
                 holder.inventory.AddItem(itemBlock);
+                int lastIndex = holder.redBlockHolder.Count - 1;
+                holder.redBlockHolder.RemoveAt(lastIndex);
                 BlockSortPositions.PositionBlocks(itemBlock.gameObject, spawnPoint.transform, 1.0f);
+                 yield return new WaitForSeconds(0.1f);
                 yield return null;
             }
 
             isSpawning = false;
-        }
-
-
-
-
-
-        public override void StartSpawning() {
-            if (!isSpawning && holder.inventory.items.Count < holder.inventory.items.Capacity) {
-                StartCoroutine(SpawnerCoroutine());
-            }
         }
     }
 }

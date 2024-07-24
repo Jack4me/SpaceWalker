@@ -15,7 +15,7 @@ namespace Blocks.Spawners {
             //если делаю в awake, то вылетает нулл
             inventory = GetComponent<InventoryHold>().inventory;
             redBlockPickUpFromPlayer = GetComponent<InventoryHold>().redBlockHolder;
-            blueBlockPickUpFromPlayer = GetComponent<InventoryHold>().blueBlockPickUpFromPlayer;
+            blueBlockPickUpFromPlayer = GetComponent<InventoryHold>().blueBlockHolder;
         }
 
         

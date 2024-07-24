@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Blocks {
     [Serializable]
-    public class BlockHolder {
+    public class BlockData {
         public GameObject Block;
         public Blocktype Blocktype;
     }

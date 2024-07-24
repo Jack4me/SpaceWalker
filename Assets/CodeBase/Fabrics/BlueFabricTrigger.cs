@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Blocks;
 using Blocks.Spawners;
 using HeroSpace;
+using InventorySystem;
 using Storage.Items;
 using UnityEngine;
 
-namespace InventorySystem {
+namespace Fabrics {
     public class BlueFabricTrigger : InventoryPickUp {
         //     public List<Item> item = new List<Item>();
         //     private BlockSpawnerBlue blockSpawnerBlue;
@@ -57,11 +57,11 @@ namespace InventorySystem {
         //         }
         //     }
         // }
-
+                                                            
         public List<Item> item = new List<Item>();
         private BlockSpawnerBlue blockSpawnerBlue;
         private InventoryHold _inventoryHold;
-
+        
         private void Awake() {
             blockSpawnerBlue = GetComponent<BlockSpawnerBlue>();
             _inventoryHold = GetComponent<InventoryHold>();
@@ -75,12 +75,12 @@ namespace InventorySystem {
 
         protected override void ProcessSwapBlock(Collider other) {
             if (other.TryGetComponent(out HeroPickUp player)) {
-                       SelectedRedBlocks(player);
+                SelectedRedBlocks(player);
                 Collider currentFabricCollider = GetComponent<Collider>();
                 PlayerPickBlocks(currentFabricCollider, player);
                 
-            }
             blockSpawnerBlue.StartSpawning();
+            }
         }
 
         public List<Item> SelectedRedBlocks(HeroPickUp player) {
@@ -91,6 +91,7 @@ namespace InventorySystem {
                 foreach (var item in redBlockItems) {
                     _inventoryHold.redBlockHolder.Add(item);
                     inventoryHero.inventory.items.Remove(item);
+                    Destroy(item.gameObject);
                                 
                 }
                 return redBlockItems;
