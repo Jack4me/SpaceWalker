@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using InventorySystem;
 using Storage.Items;
@@ -10,6 +11,7 @@ namespace Blocks.Spawners {
         private float timer = 0;
         public List<Item> redBlockPickUpFromPlayer;
         public List<Item> blueBlockPickUpFromPlayer;
+        private bool isSpawning;
 
         private void Awake() {
             //если делаю в awake, то вылетает нулл
@@ -18,24 +20,13 @@ namespace Blocks.Spawners {
             blueBlockPickUpFromPlayer = GetComponent<InventoryHold>().blueBlockHolder;
         }
 
-        
-
-
-
-
-
         private IEnumerator SpawnerCoroutine() {
+            isSpawning = true;
+            while (redBlockPickUpFromPlayer.Count > 0 && blueBlockPickUpFromPlayer.Count > 0) {
+                yield return new WaitForSeconds(0.1f);
 
-            yield return new WaitForSeconds(1f);
-            StartSpawning();
-        }
-
-        public override void StartSpawning() {
-            if (redBlockPickUpFromPlayer.Count > 0 &&  blueBlockPickUpFromPlayer.Count > 0) {
-               
-                
                 Item itemBlock = _itemFactory.CreateItemBlock(_blocktype);
-                inventory.AddItem(itemBlock); 
+                inventory.AddItem(itemBlock);
                 BlockSortPositions.PositionBlocks(itemBlock.gameObject, spawnPoint.transform, 1.0f);
                 int lastIndexRed = redBlockPickUpFromPlayer.Count - 1;
                 int lastIndexBlue = blueBlockPickUpFromPlayer.Count - 1;
@@ -44,9 +35,17 @@ namespace Blocks.Spawners {
                 Debug.Log("yayayayaya");
             }
 
-            // _inventoryPickUp.redBlockPickUpFromPlayer.Clear(); // Очищаем весь список предметов
+            isSpawning = false;
         }
 
-       
+
+        public override void StartSpawning() {
+            if (!isSpawning && redBlockPickUpFromPlayer.Count > 0 && blueBlockPickUpFromPlayer.Count > 0) {
+                StartCoroutine(SpawnerCoroutine());
+            }
+
+
+            // _inventoryPickUp.redBlockPickUpFromPlayer.Clear(); // Очищаем весь список предметов
+        }
     }
 }

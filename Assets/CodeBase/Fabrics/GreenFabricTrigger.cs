@@ -69,11 +69,11 @@ namespace Fabrics {
         //     // }
         // }
         //public List<Item> item = new List<Item>();
-        private BlockSpawnerBlue blockSpawnerBlue;
+        private BlockSpawnerGreen blockSpawnerGreen;
         private InventoryHold _inventoryHold;
 
         private void Awake() {
-            blockSpawnerBlue = GetComponent<BlockSpawnerBlue>();
+            blockSpawnerGreen = GetComponent<BlockSpawnerGreen>();
             _inventoryHold = GetComponent<InventoryHold>();
         }
 
@@ -88,6 +88,7 @@ namespace Fabrics {
                 SelectedBlocks(player);
                 Collider currentFabricCollider = GetComponent<Collider>();
                 PlayerPickBlocks(currentFabricCollider, player);
+                blockSpawnerGreen.StartSpawning();
             }
         }
 
@@ -114,7 +115,6 @@ namespace Fabrics {
                     return;
                 }
 
-                //   item = _inventoryHold.inventory.items;
                 player.PickBlocks(currentFabricCollider);
             }
         }
